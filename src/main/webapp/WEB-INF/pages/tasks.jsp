@@ -55,16 +55,19 @@
         </table>
     </c:if>
 
-    <form:form method="post" action="/add" commandName="task" >
+    <form:form method="post" action="/add" commandName="task">
         <div class="form-group">
             <form:label path="id">Id:</form:label>
-            <form:input path="id" class="form-control" placeholder="new task" disabled="true"/>
+            <form:input path="id" class="form-control" disabled="true"/>
         </div>
-            <form:label path="taskName">Name:</form:label>
-            <form:input path="taskName" class="form-control" placeholder="Name"/>
-        </div>
-        <c:if test="${empty task.id}"><button type="submit" class="btn btn-success">Add Task</button></c:if>
-        <c:if test="${!empty task.id}"><button type="submit" class="btn btn-warning">Edit Task</button></c:if>
+        <form:label path="taskName">Name:</form:label>
+        <form:input path="taskName" class="form-control" placeholder="Name"/>
+        <c:if test="${empty task.id}">
+            <button type="submit" class="btn btn-success">Add Task</button>
+        </c:if>
+        <c:if test="${!empty task.id}">
+            <button type="submit" class="btn btn-warning">Edit Task</button>
+        </c:if>
     </form:form>
 </div>
 </body>
