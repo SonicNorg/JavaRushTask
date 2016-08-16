@@ -1,4 +1,4 @@
-package com.norg.mvc;
+package com.norg.task.model;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity(name = "tasks")
 public class Task {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Basic

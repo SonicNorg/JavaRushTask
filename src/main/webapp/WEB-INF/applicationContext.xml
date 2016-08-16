@@ -3,11 +3,9 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="Task" class="com.norg.mvc.Task">
-        <property name="id" value="1"></property>
-        <property name="taskName" value="Very important deed"></property>
-        <property name="done" value="false"></property>
+    <bean id="taskService" class="com.norg.task.service.TaskServiceImpl">
+        <property name="taskDao" ref="taskDaoImpl"/>
     </bean>
 
-    <bean id="TaskRepositoryImpl" class="com.norg.mvc.TaskRepositoryImpl"></bean>
+    <bean id="taskDaoImpl" class="com.norg.task.dao.TaskDaoImpl"></bean>
 </beans>
