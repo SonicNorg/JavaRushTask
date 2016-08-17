@@ -12,5 +12,9 @@ public interface TaskService {
     void updateTask(Task task);
     void removeTask(Long id);
     Task getTaskById(Long id);
-    List listTasks();
+    List<Task> listTasks();
+
+    List<Task> filteredTasks(String type);
+
+    void fillTasks();
 }

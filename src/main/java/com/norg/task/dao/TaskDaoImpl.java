@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by pavel.krizhanovskiy on 16.08.2016.
@@ -52,5 +53,27 @@ public class TaskDaoImpl implements TaskDao {
         return em.createQuery(
                 "SELECT task FROM tasks task ORDER BY task.taskName")
                 .getResultList();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Task> filteredTasks(String type) {
+        return em.createQuery(
+                "SELECT task FROM tasks task WHERE task.done = :done ORDER BY task.taskName")
+                .setParameter("done", type.equals("done"))
+                .getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void fillTasks() {
+        Random random = new Random();
+        for (int i=0; i<10; i++) {
+            Task task = new Task();
+            task.setDone(random.nextBoolean());
+            task.setTaskName((random.nextBoolean() ? "Important " : "Useless ") + "deed #" + i);
+
+            addTask(task);
+        }
     }
 }

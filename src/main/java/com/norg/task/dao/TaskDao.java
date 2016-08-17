@@ -13,4 +13,8 @@ public interface TaskDao {
     void removeTask(Long id);
     Task getTaskById(Long id);
     List<Task> listTasks();
+
+    List<Task> filteredTasks(String type);
+
+    void fillTasks();
 }

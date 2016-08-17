@@ -44,7 +44,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List listTasks() {
+    public List<Task> listTasks() {
         return taskDao.listTasks();
+    }
+
+    @Override
+    public List<Task> filteredTasks(String type) {
+        return taskDao.filteredTasks(type);
+    }
+
+    @Override
+    @Transactional
+    public void fillTasks() {
+        taskDao.fillTasks();
     }
 }

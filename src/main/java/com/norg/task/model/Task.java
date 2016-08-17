@@ -9,10 +9,10 @@ import javax.persistence.*;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id = 0L;
 
     @Basic
-    private Boolean done;
+    private Boolean done = false;
 
     @Basic
     private String taskName;

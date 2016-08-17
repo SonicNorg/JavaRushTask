@@ -3,7 +3,6 @@ package com.norg.task.controller;
 import com.norg.task.model.Task;
 import com.norg.task.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +28,7 @@ public class TaskController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addTask(@ModelAttribute("task") Task task) {
-        if (task.getId() == null) {
+        if (task.getId() == null || task.getId() == 0L) {
             taskService.addTask(task);
         } else {
             taskService.updateTask(task);
@@ -49,5 +48,25 @@ public class TaskController {
         model.addAttribute("tasks", taskService.listTasks());
 
         return "tasks";
+    }
+
+    @RequestMapping("/filter/edit/{id}")
+    public String editInFilter(@PathVariable("id") Long id, Model model) {
+        return editTask(id, model);
+    }
+
+    @RequestMapping("/filter/{type}")
+    public String filterTasks(@PathVariable("type") String type, Model model) {
+        model.addAttribute("task", new Task());
+        model.addAttribute("tasks", taskService.filteredTasks(type));
+
+        return "tasks";
+    }
+
+    @RequestMapping("/fill")
+    public String fillTasks() {
+        taskService.fillTasks();
+
+        return "redirect:/";
     }
 }
